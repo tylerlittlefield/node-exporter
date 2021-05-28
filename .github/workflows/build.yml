@@ -1,9 +1,7 @@
 name: build
 
 on:
-  push:
-    paths-ignore:
-    - 'README'
+  push
 
 jobs:
   buildx:
