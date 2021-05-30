@@ -42,7 +42,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/arm64
           push: true
-          tags: tylurp/node-exporter:latest
+          tags: tylurp/node-exporter:latest,tylurp/node-exporter:v0.18.0
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
