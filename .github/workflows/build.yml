@@ -35,14 +35,26 @@ jobs:
           username: ${{ secrets.DOCKERHUBUNAME }}
           password: ${{ secrets.DOCKERHUBTOKEN }} 
       -
-        name: Build and push
+        name: Build and push latest
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile_latest
           platforms: linux/arm64
           push: true
-          tags: tylurp/node-exporter:latest,tylurp/node-exporter:v0.18.0
+          tags: tylurp/node-exporter:latest
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      -
+        name: Build and push v0.18.0
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_v0.18.0
+          platforms: linux/arm64
+          push: true
+          tags: tylurp/node-exporter:v0.18.0
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
